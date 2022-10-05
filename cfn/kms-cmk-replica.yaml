@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "kms-cmk-replica.yaml"
+Parameters:
+  PrimaryKeyArn:
+    Type: String
+    Description: "Key ARN"
+Resources:
+  ReplicaKey:
+    Type: "AWS::KMS::ReplicaKey"
+    Properties:
+      Description: "test replica key for custom cdk bootstrap"
+      PrimaryKeyArn: !Ref PrimaryKeyArn
+      PendingWindowInDays: 7
+      KeyPolicy:
+        Version: "2012-10-17"
+        Id: "test-for-custom-cdk-bootstrap"
+        Statement:
+          - Sid: "allow-all"
+            Effect: "Allow"
+            Principal:
+              AWS: !Sub "arn:aws:iam::${AWS::AccountId}:root"
+            Action: "kms:*"
+            Resource: "*"
+          - Action:
+              - kms:Decrypt
+              - kms:DescribeKey
+              - kms:Encrypt
+              - kms:ReEncrypt*
+              - kms:GenerateDataKey*
+            Effect: Allow
+            Principal:
+              # Not actually everyone -- see below for Conditions
+              AWS: "*"
+            Resource: "*"
+            Condition:
+              StringEquals:
+                # See https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-caller-account
+                kms:CallerAccount: !Ref AWS::AccountId
+                kms:ViaService:
+                  - !Sub "s3.${AWS::Region}.amazonaws.com"
+  KeyAlias:
+    Type: "AWS::KMS::Alias"
+    Properties:
+      AliasName: "alias/cdk-bootstrap-test"
+      TargetKeyId: !Ref ReplicaKey
