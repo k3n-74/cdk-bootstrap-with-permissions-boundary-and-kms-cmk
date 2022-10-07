@@ -101,8 +101,10 @@ RUN set -xeu \
       groff-base less jq zip unzip build-essential file \
       ca-certificates bzip2 dialog liblttng-ust0 procps \
       make llvm libncursesw5-dev xz-utils libxml2-dev libxmlsec1-dev \
+      iproute2 dnsutils \
     && sudo apt-get clean
 # 2022-09-26 メモ software-properties-common を削除した
+# 2022-10-06 メモ ip と nslookup コマンドを使いたくてiproute2,dnsutilsを追加した
 
 ############
 ## python
