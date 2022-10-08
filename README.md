@@ -1,5 +1,3 @@
-# cdk-bootstrap-with-permissions-boundary-and-kms-cmk
-
 本リポジトリは下記手順と実例のコードである。
 
 - cdk bootstrap ( cdk toolkit ) に下記カスタマイズをしてデプロイする方法。
