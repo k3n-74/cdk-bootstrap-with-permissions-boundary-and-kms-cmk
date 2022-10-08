@@ -2,8 +2,8 @@
 
 - cdk bootstrap ( cdk toolkit ) に下記カスタマイズをしてデプロイする方法。
 
-  - 独自の KMS CMK を指定。
   - Permissions Boundary を追加。
+  - 独自の KMS CMK を指定。
 
 - cdk app の全スタックに一括で permissions boundary を適用する方法。
 
