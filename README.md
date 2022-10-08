@@ -13,7 +13,7 @@
 
 ## 🚀 Dev Container の使い方
 
-- コンテナのビルドをした後は下記を実行する。
+- コンテナをビルドした後は下記を実行する。
 
   ```shell
   ika-musume:/workspace$ npm ci
