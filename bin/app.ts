@@ -1,9 +1,7 @@
 #!/usr/bin/env node
 import "source-map-support/register";
 import { App, aws_iam, Stack } from "aws-cdk-lib";
-import { TempStack } from "../lib/temp-stack";
 import { RoleStack } from "../lib/role-stack";
-import { ImagePullPrincipalType } from "aws-cdk-lib/aws-codebuild";
 
 const app = new App();
 
